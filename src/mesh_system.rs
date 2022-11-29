@@ -19,6 +19,7 @@ pub(crate) fn text_mesh(
             Option<&Handle<StandardMaterial>>,
             &TextMesh,
             Option<&Handle<Mesh>>,
+            &Visibility,
             &mut TextMeshState,
         ),
         Or<(Changed<TextMesh>, Changed<TextMeshState>)>,
@@ -40,7 +41,7 @@ pub(crate) fn text_mesh(
     // TODO: performance - split to mesh-update and mesh-create systems?
 
     for text_mesh in text_meshes.iter_mut() {
-        let (entity, transform, global_transform, material, text_mesh, mesh, mut state) = text_mesh;
+        let (entity, transform, global_transform, material, text_mesh, mesh, visibility, mut state) = text_mesh;
 
         let font = match fonts.get_mut(&text_mesh.style.font) {
             Some(font) => font,
@@ -83,6 +84,7 @@ pub(crate) fn text_mesh(
                     }),
                     transform: transform.clone(),
                     global_transform: global_transform.clone(),
+                    visibility: visibility.clone(),
                     ..Default::default()
                 });
             }

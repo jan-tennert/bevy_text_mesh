@@ -14,6 +14,8 @@ pub struct TextMeshBundle {
 
     /// Standard bevy [`GlobalTransform`]
     pub global_transform: GlobalTransform,
+    
+    pub visibility: Visibility,
 
     /// Internal mesh state, no public API
     pub text_mesh_state: TextMeshState,
